@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أنا مشغول في الوقت ده</title>
+  <link rel="icon" type="image/png" href="no.png">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    input, button {
+      padding: 0.7rem 1rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #f9f9f9;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #43a047;
+    }
+    .excuse {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #555;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    .warning {
+      margin-top: 1rem;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>أنا مشغول في الوقت ده 😅</h1>
+    <input type="date" id="date">
+    <input type="time" id="time">
+    <button onclick="generateExcuse()">⏰ أنا مشغول!</button>
+    <div class="warning" id="warningBox"></div>
+    <div class="excuse" id="excuseBox"></div>
+  </div>
+
+  <script>
+    const excuses = [
+      "عندي اجتماع مع فريق خارجي (أنا الفريق).",
+      "رايح للدكتور (نفسي).",
+      "عندي تدريب Zoom وهمي مش هتقدر تشارك فيه للأسف.",
+      "في صيانة في البيت وممنوع أتكلم.",
+      "هكون في المواصلات والنت بيقطع (كالعادة).",
+      "عندي ظرف عائلي حساس (تفاصيل لاحقًا).",
+      "أنا متاح بعد العشاء... اللي مش هاكله النهارده.",
+      "القط قاعد على اللابتوب، مستحيل أشتغل كده.",
+      "فيه update للويندوز... وقررت أسيب الجهاز يقرر مصيري.",
+      "أنا مشغول بالتفكير في حاجات مش مهمة... بس مشغول بردو.",
+      "الكونسبت بتاع الشغل مبيكلش عيش معايا الصبح.",
+      "المخ مهنج ولسه بيفتح tabs لوحده.",
+      "لسه بفكر في الاجتماع اللي فات وده لوحده مجهود.",
+      "في حد بيكلمني على واتساب ومش قادر أركز في حاجتين سوا.",
+      "فيه رسالة جاتلي من مستقبلي وقاللي ارتاح.",
+      "النت قاطع بسبب قط مشي على الراوتر.",
+      "لسه بفكر أبدأ يومي ولسه معملتوش.",
+      "مشغول بالتفكير في أعذار جديدة لناس تانية.",
+      "حاسس إني تايه في دوامة الاجتماعات، ومحتاج بريك نفسي.",
+      "فيه بريزنتيشن خيالية في دماغي ومش عايز أضيعها.",
+      "اللاب مهنج وعمال يطلع صوت غريب، أنا خايف منه بصراحة."
+    ];
+
+    function generateExcuse() {
+      const date = document.getElementById("date").value;
+      let time = document.getElementById("time").value;
+      const excuse = excuses[Math.floor(Math.random() * excuses.length)];
+      const excuseBox = document.getElementById("excuseBox");
+      const warningBox = document.getElementById("warningBox");
+
+      if (!date || !time) {
+        warningBox.innerText = "مش أنت عايز عذر؟ طب ما تكمل البوكسات يا ابني ونستريح!";
+        excuseBox.innerHTML = "";
+        return;
+      }
+
+      if (time.includes("AM") || time.includes("PM")) {
+        time = time.replace(/AM|PM/gi, '').trim();
+      }
+
+      warningBox.innerText = "";
+      excuseBox.innerHTML = `في ${date} الساعة ${time}:<br><strong>${excuse}</strong>`;
+    }
+  </script>
+</body>
+</html>
